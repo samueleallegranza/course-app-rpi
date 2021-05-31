@@ -1,0 +1,9 @@
+{
+    "username": "rpi-1",
+    "password": "raspberry",
+    
+    "api_ip": "168.119.189.237",
+    "api_port": 4000,
+
+    "nfc_port": "usb"
+}
