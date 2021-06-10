@@ -5,5 +5,8 @@
     "api_ip": "168.119.189.237",
     "api_port": 4000,
 
-    "nfc_port": "usb"
+    "nfc_port": "usb",
+
+    "display_port": 1,
+    "display_address": "0x3C"
 }

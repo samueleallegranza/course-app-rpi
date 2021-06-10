@@ -45,8 +45,10 @@ with open('./config.json') as f:
     username = config["username"]
     password = config["password"]
     nfcPort = config["nfc_port"]
+    displayPort = config["display_port"]
+    displayAddress = config["display_address"]
 
-dev = Device(username, password, apiHost, nfcPort)
+dev = Device(username, password, apiHost, nfcPort, displayPort, displayAddress)
 
 # Authentication
 response = dev.auth()

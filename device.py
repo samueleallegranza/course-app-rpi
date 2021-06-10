@@ -6,9 +6,11 @@ from nfc.clf import RemoteTarget
 
 import time, threading
 
+from display import Display
+
 
 class Device:
-    def __init__(self, username, password, host, nfc_port):
+    def __init__(self, username, password, host, nfc_port, display_port, display_address):
         self.username = username
         self.md5password = hashlib.md5(str(password).encode('utf-8')).hexdigest()
         self.host = host
@@ -19,6 +21,7 @@ class Device:
         self.nfc_clf = nfc.ContactlessFrontend(self.nfc_port)
         self.nfc_thread_running = False
 
+        self.display = Display(display_port, int(display_address, 16))
 
     # --- NFC READER ---
 
@@ -92,6 +95,8 @@ class Device:
         response = self._request(method, path, data)
         if(response != False):
             self.idroom = response['codroom']
+            self.display.connected()
+
         return response
 
     def movement(self, idnfc):
@@ -103,3 +108,7 @@ class Device:
         }
         
         response = self._request(method, path, data)
+        if(response == False):
+            self.display.denied()
+        else:
+            self.display.granted(response)
